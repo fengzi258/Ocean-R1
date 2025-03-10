@@ -41,7 +41,7 @@ def get_eval_config():
 def prepare_test_messages(dataset_name, data_split):
     try:
         local_data_dir = "./src/eval/data"
-        dataset_path =  os.path.join(local_data_dir, dataset_name.replace("/","_"))
+        dataset_path =  os.path.join(local_data_dir, dataset_name)
         ds = datasets.load_from_disk(dataset_path)
     except:
         ds = datasets.load_dataset(dataset_name)

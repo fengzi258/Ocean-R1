@@ -95,7 +95,7 @@ def main(script_args, training_args, model_args):
     # Load the dataset
     is_local = os.environ.get("IS_LOCAL", False)
     if is_local:
-        data_path = f"/data_train2/mllm/minglingfeng/mllm_data/processed_data/r1_data/{script_args.dataset_name}"
+        data_path = f"./processed_data/r1_data/{script_args.dataset_name}"
         dataset = load_from_disk(data_path)
         # shuffle by seed
         try:
@@ -107,6 +107,7 @@ def main(script_args, training_args, model_args):
         print(dataset)
     else:
         dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
+        dataset.save_to_disk(f"./processed_data/r1_data/{script_args.dataset_name}")
 
 
     # Format into conversation
@@ -155,7 +156,7 @@ def main(script_args, training_args, model_args):
     if "image" in dataset[script_args.dataset_train_split].features:
         print("has image in dataset")
         try:
-            dataset = dataset.map(make_conversation_image, num_proc=32)  # Utilize multiprocessing for faster mapping
+            dataset = dataset.map(make_conversation_image, num_proc=8)  # Utilize multiprocessing for faster mapping
         # dataset = dataset.remove_columns(["original_question", "original_answer"])
         except Exception as e:
             print(e)
