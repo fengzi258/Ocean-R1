@@ -211,6 +211,7 @@ def default_accuracy_reward(completion, sol, **kwargs):
                     # For text answers, use fuzzy matching
                     reward = ratio(clean_text(student_answer), clean_text(ground_truth))
             
+            # The answer partially mismatches the ground truth
             if reward <= 0.6:
                 reward = 0.0
             elif reward > 0.6 and reward < 1.0:

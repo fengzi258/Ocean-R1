@@ -21,11 +21,11 @@ max_new_tokens = 4096
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def get_eval_config():
     parser = argparse.ArgumentParser(description="Inference script for GeoQA evaluation.")
-    parser.add_argument("--model_path_list", type=str, default="/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-6000", help="Path to the model checkpoint (e.g., qwen2vl model or a fine-tuned model).")
+    parser.add_argument("--model_path_list", type=str, default="/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct", help="Path to the model checkpoint (e.g., qwen2vl model or a fine-tuned model).")
     parser.add_argument("--batch_size", type=int, default=4, help="Batch size for inference. Reduce if GPU OOM (default: 50).")
-    parser.add_argument("--output_dir", type=str, default="/data_train2/mllm/minglingfeng/code/R1-V/src/eval/logs/eval/", help="Path to save inference result (e.g., JSON file).")
+    parser.add_argument("--output_dir", type=str, default="。/src/eval/logs/eval/", help="Path to save inference result (e.g., JSON file).")
     parser.add_argument("--dataset_name",  type=str, default="MathLLMs/MathVision", help="Path to the prompts JSONL file for GeoQA evaluation.")
-    parser.add_argument("--data_split",  type=str, default="testmini", help="Path to the prompts JSONL file for GeoQA evaluation.")
+    parser.add_argument("--data_split",  type=str, default="test", help="Path to the prompts JSONL file for GeoQA evaluation.")
     all_gpu = ",".join(map(str, range(torch.cuda.device_count())))
     parser.add_argument("--gpu_ids", default=all_gpu, help="comma-separated list of GPU IDs to use")
     args = parser.parse_args()
@@ -36,8 +36,8 @@ def get_eval_config():
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def prepare_test_messages(dataset_name, data_split):
     try:
-        local_data_dir = "/data_train2/mllm/minglingfeng/mllm_data/eval_datasets"
-        dataset_path =  os.path.join(local_data_dir, dataset_name.replace("/","_"))
+        local_data_dir = "./src/eval/data"
+        dataset_path =  os.path.join(local_data_dir, dataset_name)
         ds = datasets.load_from_disk(dataset_path)
     except:
         ds = datasets.load_dataset(dataset_name)
@@ -248,14 +248,8 @@ if __name__ == "__main__":
     print(args)
     model_path_list = args.model_path_list.split(",")
     for model_path in model_path_list:
-        try:
-            args.model_path = model_path
-            print(args.model_path)
-            testset_data, tested_messages = prepare_test_messages(args.dataset_name, args.data_split)
-            all_predicts = multi_gpu_inference(tested_messages, args.gpu_ids, args.model_path, args.batch_size)
-            compute_metrics(testset_data, all_predicts, args)
-        except:
-            continue
-
-# source /data_train2/mllm/anaconda3/bin/activate r1-v_dev
-# CUDA_VISIBLE_DEVICES
+        args.model_path = model_path
+        print(args.model_path)
+        testset_data, tested_messages = prepare_test_messages(args.dataset_name, args.data_split)
+        all_predicts = multi_gpu_inference(tested_messages, args.gpu_ids, args.model_path, args.batch_size)
+        compute_metrics(testset_data, all_predicts, args)

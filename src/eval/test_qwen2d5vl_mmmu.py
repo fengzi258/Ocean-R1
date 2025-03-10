@@ -17,7 +17,7 @@ def run():
     # Set up the argument parser
     parser = argparse.ArgumentParser(description="Receive deepen model's args")
     parser.add_argument("--model_path_list", default="/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct", type=str, help="model path")
-    parser.add_argument("--output_dir", default='/data_train2/mllm/minglingfeng/code/R1-V/src/eval/logs/eval/', type=str, help="save path")
+    parser.add_argument("--output_dir", default='./src/eval/logs/eval/', type=str, help="save path")
     parser.add_argument("--dataset_name", default="MMMU/MMMU", type=str, help="dataset name")
     parser.add_argument("--ds_split", default="validation", type=str, help="test dataset name")
     parser.add_argument("--batch_size", default=16, type=int, help="batch size")
@@ -27,19 +27,6 @@ def run():
 
     MODEL_PATH_list = args.model_path_list.split(",")
 
-    MODEL_PATH_list =[
-
-        "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-6250",
-        # "/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct",
-        # "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-6100",
-        # "/checkpoint_mount/r1-v-3b-v2/exp-Qwen2.5-VL-3B-concat_visual_data_w_rec_139k/checkpoint-8400",
-        # "/checkpoint_mount/r1-v-3b-v2/exp-Qwen2.5-VL-3B-concat_visual_data_w_rec_139k/checkpoint-8500",
-        # "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v1/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-1600",
-
-        # "/checkpoint_mount/r1-v-3b-concat-visual-data-w-rec-135k-v2/exp-Qwen2.5-VL-3B-concat_visual_data_w_rec_135k_v2/checkpoint-3200",
-        # "/checkpoint_mount/r1-v-3b-concat-visual-data-w-rec-135k-v2/exp-Qwen2.5-VL-3B-concat_visual_data_w_rec_135k_v2/checkpoint-3400"
-        
-    ]
     output_dir = f"{args.output_dir}"
     os.makedirs(output_dir, exist_ok = True)
 
@@ -98,8 +85,8 @@ def run():
         for sub_dataset_name in sub_dataset_name_list:
 
             try:
-                local_data_dir = "/data_train2/mllm/minglingfeng/mllm_data/eval_datasets"
-                dataset_path =  os.path.join(local_data_dir, dataset_name.replace("/","_"), sub_dataset_name)
+                local_data_dir = "./src/eval/data"
+                dataset_path =  os.path.join(local_data_dir, dataset_name, sub_dataset_name)
                 ds = datasets.load_from_disk(dataset_path)
             except:
                 ds = datasets.load_dataset(dataset_name, sub_dataset_name)
@@ -252,7 +239,4 @@ def run():
 
 if __name__ == "__main__":
     run()
-# source /data_train2/mllm/anaconda3/bin/activate r1-v_dev
-# CUDA_VISIBLE_DEVICES=1 python /data_train2/mllm/minglingfeng/code/R1-V/src/eval/test_qwen2d5vl_mmmu.py --model_path_list /checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-6000
-
 

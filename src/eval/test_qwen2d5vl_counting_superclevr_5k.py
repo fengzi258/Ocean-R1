@@ -5,24 +5,11 @@ import json
 from tqdm import tqdm
 import re
 
-# source /data_train2/mllm/anaconda3/bin/activate r1-v_dev
-# CUDA_VISIBLE_DEVICES
-# MODEL_PATH="/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct" # Qwen2vl-2b-Instruct for original scores
+
+img_dir = "./src/eval/data/Super_CLEVR"
 
 MODEL_PATH_list = [
-    # "/data_train2/mllm/minglingfeng/code/R1-V/src/r1-v/src/outputs/exp-Qwen2.5-VL-3B/concat_visual_data_w_rec_139k/checkpoint-800",
-    # "/data_train2/mllm/minglingfeng/code/R1-V/src/r1-v/src/outputs/exp-Qwen2.5-VL-3B/concat_visual_data_w_rec_139k/checkpoint-650",
-
-    "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-1600",
-    "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-1700",
-    "/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-1800",
-
-
-    # "/global_data/mllm/minglingfeng/models/Qwen2.5-VL-7B-Instruct",
-    # "/data_train2/mllm/minglingfeng/code/R1-V/src/r1-v/src/outputs/exp-Qwen2.5-VL-7B/concat_visual_data_w_rec_139k/checkpoint-600",
-    # "/data_train2/mllm/minglingfeng/code/R1-V/src/r1-v/src/outputs/exp-Qwen2.5-VL-7B/concat_visual_data_w_rec_139k/checkpoint-650",
-    # "/data_train2/mllm/minglingfeng/code/R1-V/src/r1-v/src/outputs/exp-Qwen2.5-VL-7B/concat_visual_data_w_rec_139k/checkpoint-700",
-
+    "/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct",
 ]
 
 for MODEL_PATH in MODEL_PATH_list:
@@ -30,8 +17,8 @@ for MODEL_PATH in MODEL_PATH_list:
 
     ckpt_name = "_".join(MODEL_PATH.split("/")[-3:])
     BSZ = 64 if "3B" in MODEL_PATH else 48
-    OUTPUT_PATH=f"/data_train2/mllm/minglingfeng/code/R1-V/src/eval/logs/eval/counting_superclevr_5k_grpo_{ckpt_name}.json"
-    PROMPT_PATH="/data_train2/mllm/minglingfeng/code/R1-V/src/eval/prompts/super_clevr_test_5k.jsonl"
+    OUTPUT_PATH=f"./src/eval/data/counting_superclevr_5k_grpo_{ckpt_name}.json"
+    PROMPT_PATH="./src/eval/data/super_clevr_test_5k.jsonl"
 
     #We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
 
@@ -73,7 +60,6 @@ for MODEL_PATH in MODEL_PATH_list:
 
     messages = []
 
-    img_dir = "/data_train2/mllm/minglingfeng/code/R1-V/src/eval/Super_CLEVR/images"
 
     for i in data:
         message = [{

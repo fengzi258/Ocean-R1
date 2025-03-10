@@ -106,12 +106,12 @@ install_requires = [
 ]
 
 setup(
-    name="r1-v",
+    name="openv-r1",
     version="0.1.0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
-    author="The r1-v team and the Hugging Face team (past and future)",
-    description="R1-V",
+    author="The OpenV-R1 team and the Hugging Face team (past and future)",
+    description="OpenV-R1",
     license="Apache",
-    url="https://github.com/Deep-Agent/R1-V",
+    url="https://github.com/fengzi258/OpenV-R1",
     package_dir={"": "src"},
     packages=find_packages("src"),
     zip_safe=False,

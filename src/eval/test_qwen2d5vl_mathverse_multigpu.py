@@ -15,17 +15,21 @@ import os
 import copy
 from utils import default_accuracy_reward
 
+# "xyliu6/mathverse_vision_dominant",
+# "xyliu6/mathverse_4k"
+# dataset_name = "xyliu6/mathverse_vision_dominant"
+# sub_ds_name = "train"
 max_new_tokens = 2048
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>> 1. get evaluation configuration <<<<<
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def get_eval_config():
     parser = argparse.ArgumentParser(description="Inference script for GeoQA evaluation.")
-    parser.add_argument("--model_path_list", type=str, default="/checkpoint_mount/r1-v-3b-text-math-collected-44k-v0/exp-Qwen2.5-VL-3B-orz_math_57k_collected_44k/checkpoint-6000", help="Path to the model checkpoint (e.g., qwen2vl model or a fine-tuned model).")
+    parser.add_argument("--model_path_list", type=str, default="/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct", help="Path to the model checkpoint (e.g., qwen2vl model or a fine-tuned model).")
     parser.add_argument("--batch_size", type=int, default=4, help="Batch size for inference. Reduce if GPU OOM (default: 50).")
-    parser.add_argument("--output_dir", type=str, default="/data_train2/mllm/minglingfeng/code/R1-V/src/eval/logs/eval/", help="Path to save inference result (e.g., JSON file).")
-    parser.add_argument("--dataset_name",  type=str, default="AI4Math/MathVerse", help="Path to the prompts JSONL file for GeoQA evaluation.")
-    parser.add_argument("--data_split",  type=str, default="testmini", help="Path to the prompts JSONL file for GeoQA evaluation.")
+    parser.add_argument("--output_dir", type=str, default="./src/eval/logs/eval/", help="Path to save inference result (e.g., JSON file).")
+    parser.add_argument("--dataset_name",  type=str, default="xyliu6/mathverse_4k", help="Path to the prompts JSONL file for GeoQA evaluation.")
+    parser.add_argument("--data_split",  type=str, default="train", help="Path to the prompts JSONL file for GeoQA evaluation.")
     all_gpu = ",".join(map(str, range(torch.cuda.device_count())))
     parser.add_argument("--gpu_ids", default=all_gpu, help="comma-separated list of GPU IDs to use")
     args = parser.parse_args()
@@ -36,8 +40,8 @@ def get_eval_config():
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def prepare_test_messages(dataset_name, data_split):
     try:
-        local_data_dir = "/data_train2/mllm/minglingfeng/mllm_data/eval_datasets"
-        dataset_path =  os.path.join(local_data_dir, dataset_name.replace("/","_"), data_split)
+        local_data_dir = "./src/eval/data"
+        dataset_path =  os.path.join(local_data_dir, dataset_name.replace("/","_"))
         ds = datasets.load_from_disk(dataset_path)
     except:
         ds = datasets.load_dataset(dataset_name)
@@ -50,8 +54,7 @@ def prepare_test_messages(dataset_name, data_split):
 
     sub_ds = ds[data_split]
     for example in sub_ds:
-        question = example["question"]
-        answer = example["answer"]
+        question = example["problem"]
 
         message = [{
             "role": "user",
@@ -115,7 +118,7 @@ def answer_a_batch_question_qwen(batch_messages, model, processor):
         images=image_inputs,
         videos=video_inputs,
         padding=True,
-        # padding_side="left",
+        padding_side="left",
         return_tensors="pt",
     )
     inputs = inputs.to(model.device)
@@ -188,7 +191,7 @@ def compute_metrics(testset_data, all_predicts, args):
 
     for input_example, model_output in zip(testset_data, all_predicts):
         original_output = model_output
-        ground_truth = input_example['answer']
+        ground_truth = input_example['solution']
         reward,model_answer = default_accuracy_reward(original_output, ground_truth)
         if reward == 1.0:
             correct_number += 1
@@ -198,6 +201,7 @@ def compute_metrics(testset_data, all_predicts, args):
             
         
         result = copy.deepcopy(input_example)
+        result["image"] = None
         if isinstance(model_answer,list):
             model_answer = model_answer[0]
         try:
@@ -245,7 +249,6 @@ if __name__ == "__main__":
             testset_data, tested_messages = prepare_test_messages(args.dataset_name, args.data_split)
             all_predicts = multi_gpu_inference(tested_messages, args.gpu_ids, args.model_path, args.batch_size)
             compute_metrics(testset_data, all_predicts, args)
-        except:
+        except Exception as e:
+            print(e)
             continue
-# source /data_train2/mllm/anaconda3/bin/activate r1-v_dev
-# CUDA_VISIBLE_DEVICES
