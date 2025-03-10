@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=1 /data_train2/mllm/anaconda3/envs/r1-v_dev/bin/python /data_train2/mllm/minglingfeng/code/R1-V/src/eval/test_qwen2vl_geoqa.py
