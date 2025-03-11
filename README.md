@@ -2,15 +2,28 @@
 
 ## 🎯Overview
 
-Inspired by the powerful reasoning capabilities of [DeepSeek R1](https://arxiv.org/abs/2501.12948) in the text domain, we aim to transfer the large-scale RL techniques that work well for LLMs to multimodal scenarios. 
+<!-- Inspired by the powerful reasoning capabilities of [DeepSeek R1](https://arxiv.org/abs/2501.12948) in the text domain, we aim to transfer the large-scale RL techniques that work well for LLMs to multimodal scenarios. 
 
 Since visual perception tasks involve many aspects, we mainly focus on visual recognition and positioning as well as reasoning tasks. The motivation behinds this is that visual perception is used to identify and extract visual information, and LLM's powerful reasoning ability is used to solve the problem. The combination of the two can solve complex multimodal reasoning tasks. To this end, we conducted the following explorations:
 
 - We train Qwen2.5-VL-3B-Instruct on text-only dataset [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function. 
 - We train Qwen2.5-VL-3B-Instruct on visual dataset [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function.
-- We train Qwen2.5-VL-3B-Instruct on multimodel data combined with the above two. We will relase the results soon.
+- We train Qwen2.5-VL-3B-Instruct on multimodel data combined with the above two. We will relase the results soon. -->
 
-🔥We open-source our complete pipeline to foster further research in this area. We release all our codes, model, data. We believe this comprehensive open-source framework would help the community better explore the multimodal reasoning task.
+
+Inspired by the robust reasoning capabilities demonstrated by [DeepSeek R1](https://arxiv.org/abs/2501.12948)  in the text domain, we seek to extend the large-scale reinforcement learning (RL) techniques that have proven effective for large language models (LLMs) to multimodal scenarios.
+
+Given the multifaceted nature of visual perception tasks, our focus centers on two critical components: visual recognition and positioning, as well as reasoning tasks. This approach is motivated by the complementary strengths of visual perception—which identifies and extracts visual information—and the advanced reasoning capabilities of LLMs, which are adept at problem-solving. By integrating these two modalities, we aim to address complex multimodal reasoning challenges. To achieve this, we conducted the following experiments:
+
+- **Text-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using Goal-Specific Reward Optimization (GRPO) with a rule-based reward function.
+
+- **Visual-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_visual_data) using GRPO with a rule-based reward function.
+
+- **Multimodal Training**: We trained Qwen2.5-VL-3B-Instruct on a combined dataset integrating both text and visual data. The results of these experiments will be released in the near future.
+
+This systematic exploration aims to evaluate the efficacy of GRPO in enhancing multimodal reasoning capabilities and to provide insights into the interplay between visual and textual modalities in complex reasoning tasks.
+
+🔥We open-source our complete pipeline to foster further research in this area. We release all our codes, model, data. 
 - [🤗 OpenV-R1-3B-Instruct](https://huggingface.co/minglingfeng/OpenV_R1_3B_Instruct)
 
 - [🤗 OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data)
@@ -22,8 +35,8 @@ Since visual perception tasks involve many aspects, we mainly focus on visual re
 
 
 
-<img width="425" src=./assets/training_reward.png />
-<img width="425" src=./assets/training_length.png />
+<img width="400" src=./assets/training_reward.png />
+<img width="400" src=./assets/training_length.png />
 
 ---
 
@@ -35,7 +48,7 @@ Since visual perception tasks involve many aspects, we mainly focus on visual re
 ### 🗞️ Our Findings
 ![Image](./assets/openv-r1.png)
 
-- **Super Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.*
+- **Super Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.
 However, the model's performance on strong visual perception tasks significantly decreased. For instance, in the Grounding task (refcoco/+/g), average performance dropped from 75.3 to 2.4. This indicates that enhancing specific capabilities through GRPO can impair other aspects of the model.
 - **Diverse Data Achieves Better Performances**: When trained with visual data, the model exhibited substantial performance gains across a wide range of tasks, including counting, geometric reasoning, grounding, mathematical problem-solving, and general-purpose tasks. This demonstrates the importance of multimodal training in achieving balanced and comprehensive improvements across diverse domains.
 
@@ -144,6 +157,12 @@ accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1
 *Todo*: 
 - 结果表格展示
 - Typical examples
+
+| Model       | SuperCLEVR       |GEOQA       |RefCOCO/+/g AVG     |MathVision       |MathVerse       |OlympiadBench       |MMMU       |
+|:-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+| Qwen2.5-VL-3B-Instruct   |64.1    |37.0    |75.3    |14.4    |27.6    |14.6    |40.5    |
+| Qwen2.5-VL-3B-Instruct-GRPO-text   | 66.1   |38.7    |2.4    |17.4   |31.5    |14.8    |43.4    |
+| Qwen2.5-VL-3B-Instruct-GRPO-vis   | 93.4   | 54.2   |86.1    |19.1    |40.0    |15.5    |47.9    |
 
 ### Counting: SuperCLEVR
 
