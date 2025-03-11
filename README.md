@@ -19,7 +19,7 @@ Given the multifaceted nature of visual perception tasks, our focus centers on t
 
 - **Visual-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_visual_data) using GRPO with a rule-based reward function.
 
-- **Multimodal Training**: We trained Qwen2.5-VL-3B-Instruct on a combined dataset integrating both text and visual data. The results of these experiments will be released in the near future.
+- **Multimodal Training**: We are training Qwen2.5-VL-3B-Instruct on a combined dataset integrating both text and visual data. The results of these experiments will be released in the near future.
 
 This systematic exploration aims to evaluate the efficacy of GRPO in enhancing multimodal reasoning capabilities and to provide insights into the interplay between visual and textual modalities in complex reasoning tasks.
 
@@ -35,8 +35,8 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 
 
 
-<img width="400" src=./assets/training_reward.png />
-<img width="400" src=./assets/training_length.png />
+<img width="379" src=./assets/training_reward.png />
+<img width="379" src=./assets/training_length.png />
 
 ---
 
@@ -230,13 +230,13 @@ We sincerely thank [DeepSeek](https://github.com/deepseek-ai/DeepSeek-R1), [Open
 
 ## 📚 Contributors and Citation
 
-Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN),  [Youwei Zhang](), [Yadong Li](), [Song chen](), [Jianhua Xu](), [Zenan Zhou](https://scholar.google.com/citations?user=tZa2hzAAAAAJ&hl=en), [Weipeng Chen](https://scholar.google.com.hk/citations?user=tKPgUmMAAAAJ&hl=zh-CN). 
+Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN), Youwei Zhang, [Yadong Li](https://scholar.google.com/citations?user=VLfXcYIAAAAJ&hl=en), Song Chen, Jianhua Xu, [Zenan Zhou](https://scholar.google.com/citations?user=tZa2hzAAAAAJ&hl=en), [Weipeng Chen](https://scholar.google.com.hk/citations?user=tKPgUmMAAAAJ&hl=zh-CN). 
 
 If you find this work useful, please cite it as follows:
 ```bib
 @misc{ming2025openvr1,
-  author       = {Ming},
-  title        = {OpenV-R1},
+  author       = {Lingfeng Ming, Youwei Zhang, Yadong Li, Song Chen, Jianhua Xu, Zenan Zhou, Weipeng Chen},
+  title        = {OpenV-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning},
   howpublished = {\url{https://github.com/fengzi258/OpenV-R1}},
   note         = {Accessed: 2025-03-10},
   year         = {2025}
