@@ -1,54 +1,47 @@
-# OpenV-R1
+# OpenV-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning
 
+## 🎯Overview
 
-> OpenV-R1 investigates the efficacy of GRPO training in VLM using solely textual inference data, and achieves significant performance improvements across multiple tasks by incorporating multimodal data. 
+Inspired by the powerful reasoning capabilities of [DeepSeek R1](https://arxiv.org/abs/2501.12948) in the text domain, we aim to transfer the large-scale RL techniques that work well for LLMs to multimodal scenarios. 
 
-**Resources:** 
+Since visual perception tasks involve many aspects, we mainly focus on visual recognition and positioning as well as reasoning tasks. The motivation behinds this is that visual perception is used to identify and extract visual information, and LLM's powerful reasoning ability is used to solve the problem. The combination of the two can solve complex multimodal reasoning tasks. To this end, we conducted the following explorations:
 
-[🤗 OpenV-R1-3B-Instruct](https://huggingface.co/minglingfeng/OpenV_R1_3B_Instruct)
+- We train Qwen2.5-VL-3B-Instruct on text-only dataset [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function. 
+- We train Qwen2.5-VL-3B-Instruct on visual dataset [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function.
+- We train Qwen2.5-VL-3B-Instruct on multimodel data combined with the above two. We will relase the results soon.
 
-[🤗 OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data)
+🔥We open-source our complete pipeline to foster further research in this area. We release all our codes, model, data. We believe this comprehensive open-source framework would help the community better explore the multimodal reasoning task.
+- [🤗 OpenV-R1-3B-Instruct](https://huggingface.co/minglingfeng/OpenV_R1_3B_Instruct)
 
-[🤗 OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data)
+- [🤗 OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data)
 
+- [🤗 OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data)
 
-**OpenV-R1 Team:** 
-
-[LingFeng Ming](https://github.com/fengzi258) · 
-
-<!-- **Contributors**:
-
-<a href="https://github.com/Deep-Agent/R1-V/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Deep-Agent/R1-V&max=30" />
-</a> -->
+> [!NOTE] 
+> These data are from the open source community and are obtained through cleaning and filtering.
 
 
 
----
-
-### News
-
-- 2025-03-10: We upload the evaluation script and polish the README. 
-- 2025-03-10: We upload the training codebase.
-- 2025-03-10: We release the OpenV-R1 repo.
+<img width="425" src=./assets/training_reward.png />
+<img width="425" src=./assets/training_length.png />
 
 ---
 
-### Our Findings
+### 🚀 News
+- 2025-03-10: We release the OpenV-R1 repo, including codebase, model, and training datasets.
+
+---
+
+### 🗞️ Our Findings
 ![Image](./assets/openv-r1.png)
 
-- *In our experiments, when training exclusively with textual inference data, the model's performance on strong visual perception tasks significantly decreased. For instance, in the Grounding task (refcoco/+/g), average performance dropped from 75.3 to 2.4. This indicates that enhancing specific capabilities through focused training can impair other aspects of the model.*
-- *However, on other tasks such as geometric reasoning and mathematical tasks, we observed varying degrees of performance improvement. This suggests that incorporating textual inference data enhances the VLM model's reasoning capabilities. Additionally, improvements were noted in counting tasks and general-purpose tasks, demonstrating that enhanced reasoning abilities can generalize to general tasks.*
-- *When trained with multimodal data, the model demonstrates significant improvements across a variety of tasks, including counting, geometric reasoning, grounding, mathematical tasks, and general-purpose tasks.*
+- **Super Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.*
+However, the model's performance on strong visual perception tasks significantly decreased. For instance, in the Grounding task (refcoco/+/g), average performance dropped from 75.3 to 2.4. This indicates that enhancing specific capabilities through GRPO can impair other aspects of the model.
+- **Diverse Data Achieves Better Performances**: When trained with visual data, the model exhibited substantial performance gains across a wide range of tasks, including counting, geometric reasoning, grounding, mathematical problem-solving, and general-purpose tasks. This demonstrates the importance of multimodal training in achieving balanced and comprehensive improvements across diverse domains.
 
 
 
-
-<!-- 
-![image](https://github.com/user-attachments/assets/f5191b1e-dde2-42b7-9ec9-10f7f6213c12) -->
-
-
-## Setup
+## 📦 Setup
 
 ```bash
 conda create -n openv_r1 python=3.11 
@@ -61,26 +54,11 @@ bash setup.sh
 > If you meet bug when running the script, first try align your environments with `./src/requirements.txt`
 
 
-<!-- ### Supported Models
 
-1. Qwen2-VL
-2. Qwen2.5-VL 
+## 🔄 Training
 
-### Supported Training Datasets
-
-1. [🤗 R1V Training Dataset: CLEVR-70k-Counting](https://huggingface.co/datasets/leonardPKU/clevr_cogen_a_train): Item Counting Problems
-
-2. [🤗 R1V Training Dataset: CLEVR-70k-Complex](https://huggingface.co/datasets/MMInstruction/Clevr_CoGenT_TrainA_70K_Complex): Number Related Reasoning 
-
-3. [🤗 R1V Training Dataset: GEOQA-8k](https://huggingface.co/datasets/leonardPKU/GEOQA_R1V_Train_8K): Geometry Reasoning -->
-
-
-<!-- ### Supported Evaluations
-
-1. [SuperClevr-200](https://github.com/Deep-Agent/R1-V?tab=readme-ov-file#superclevr): Item Counting Problems
-2. [GeoQA-Test-Direct-Answer-735](https://github.com/Deep-Agent/R1-V?tab=readme-ov-file#geoqa): Geometry Reasoning -->
-
-## Training
+### Data Preparation
+You can download our training data from [OpenV_R1_collected_visual_data](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data) and [OpenV_R1_collected_text_data](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_text_data).
 
 ### GRPO
 - ./src/scripts/run_grpo_qwen2d5vl.sh
@@ -161,7 +139,7 @@ We also provide SFT code, please follow the script and edit the config to custom
 accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1/sft.py --config src/r1-v/configs/qwen2vl_sft_config.yaml 
 ```
 
-## Evaluation
+## 🧪 Evaluation
 
 *Todo*: 
 - 结果表格展示
@@ -181,11 +159,6 @@ python ./src/eval/test_qwen2d5vl_counting_superclevr.py
 ```
 
 ### Geo Reasoning: GEOQA
-
-<!-- <img width="379" alt="截屏2025-02-11 13 38 50" src="https://github.com/user-attachments/assets/0282872d-bfe5-40fa-ac00-8986450a0b1e" />
-<img width="379" alt="截屏2025-02-11 14 54 16" src="https://github.com/user-attachments/assets/053ebb99-5f19-4599-be51-a7c335ab2b8b" /> -->
-
-
 
 We provide the example script to evaluate on the test set (direct answer form) of [GEOQA](https://arxiv.org/abs/2312.11370).
 
@@ -229,15 +202,21 @@ python ./src/eval/test_qwen2d5vl_olympiadbench_multigpu.py
 python ./src/eval/test_qwen2d5vl_mmmu.py
 ```
 
+## 📋️ TODO
+- Training with the combined data
+- Synthesize more high-quality and diverse multimodal data
+- Scale up to larger models and more general tasks
 
-
-## Acknowledgements
+## 🤝 Acknowledgements
 
 We sincerely thank [DeepSeek](https://github.com/deepseek-ai/DeepSeek-R1), [Open-R1](https://github.com/huggingface/open-r1), [QwenVL](https://github.com/QwenLM/Qwen2.5-VL), [Open-R1-Multimodal](https://github.com/EvolvingLMMs-Lab/open-r1-multimodal), [R1-V](https://github.com/Deep-Agent/R1-V) (our initial codebase), [VLM-R1](https://github.com/om-ai-lab/VLM-R1), [CLEVR](https://cs.stanford.edu/people/jcjohns/clevr/), [SuperCLEVR](https://github.com/Lizw14/Super-CLEVR), [G-LLAVA](https://arxiv.org/abs/2312.11370), [RefCOCO](https://github.com/lichengunc/refer), and [RefGTA](https://github.com/mikittt/easy-to-understand-REG/tree/master/pyutils/refer2) for providing open source resources and to build the project. 
-<!-- Special thanks to [Kimi](https://kimi.moonshot.cn/), [bAInance Labs](https://bainancelabs.com/) for supporting computation resources and [Yuxin Wu](https://scholar.google.com/citations?user=mJQI-gUAAAAJ&hl=en), [Xinyu Zhou](https://scholar.google.com/citations?user=Jv4LCj8AAAAJ&hl=en), [Baobao Chang](https://scholar.google.com.au/citations?user=LaKNyhQAAAAJ&hl=en) for their valuable advice. -->
 
-## Citation
 
+## 📚 Contributors and Citation
+
+Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN),  [Youwei Zhang](), [Yadong Li](), [Song chen](), [Jianhua Xu](), [Zenan Zhou](https://scholar.google.com/citations?user=tZa2hzAAAAAJ&hl=en), [Weipeng Chen](https://scholar.google.com.hk/citations?user=tKPgUmMAAAAJ&hl=zh-CN). 
+
+If you find this work useful, please cite it as follows:
 ```bib
 @misc{ming2025openvr1,
   author       = {Ming},
