@@ -83,7 +83,7 @@ cd src/r1-v
 HF_DATASET="minglingfeng/OpenV_R1_collected_visual_data" 
 
 export FORMAT_REWARD_FACTOR=1.0
-export IS_LOCAL="true" ## load_from_disk or load_dataset from huggingface: minglingfeng/OpenV_R1_collected_visual_data
+export IS_LOCAL=False ## load_from_disk or load_dataset from huggingface: minglingfeng/OpenV_R1_collected_visual_data
 export DEBUG_MODE="true"
 export LOG_PATH=./src/logs/debug_qwen2p5_vl_3b_${HF_DATASET}.log
 # export WANDB_API_KEY="xxxxx"

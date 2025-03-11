@@ -16,3 +16,5 @@ pip install vllm==0.7.3
 pip install git+https://github.com/huggingface/transformers.git@a40f1ac602fe900281722254c52ce3773f28eb0e
 
 pip install flash_attn==2.7.1.post4
+
+pip install Levenshtein babel
