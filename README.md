@@ -154,9 +154,6 @@ accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1
 
 ## 🧪 Evaluation
 
-*Todo*: 
-- 结果表格展示
-- Typical examples
 
 | Model       | SuperCLEVR       |GEOQA       |RefCOCO/+/g AVG     |MathVision       |MathVerse       |OlympiadBench       |MMMU       |
 |:-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
