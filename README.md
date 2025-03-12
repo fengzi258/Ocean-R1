@@ -229,7 +229,7 @@ We sincerely thank [DeepSeek](https://github.com/deepseek-ai/DeepSeek-R1), [Open
 
 ## 📚 Contributors and Citation
 
-Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN), Youwei Zhang, [Yadong Li](https://scholar.google.com/citations?user=VLfXcYIAAAAJ&hl=en), Song Chen, Jianhua Xu. 
+Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN), Youwei Zhang, [Yadong Li](https://scholar.google.com/citations?user=VLfXcYIAAAAJ&hl=en), Song Chen, Jianhua Xu, Zenan Zhou, Weipeng Chen. 
 
 If you find this work useful, please cite it as follows:
 ```bib
