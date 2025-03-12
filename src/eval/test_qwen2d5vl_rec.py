@@ -35,11 +35,7 @@ for MODEL_PATH in MODEL_PATH_list:
     DATA_ROOT = "./src/eval/data/coco/rec_jsons_processed"
 
     TEST_DATASETS = ['refcoco_val', 'refcocop_val', 'refcocog_val']
-    # TEST_DATASETS = ['refcoco_testA','refcoco_testB', 'refcocop_testA', 'refcocop_testB', 'refcocog_test']
     IMAGE_ROOT = "./src/eval/data/coco"
-
-    # TEST_DATASETS = ['refgta_subsample']
-    # IMAGE_ROOT = "/data/shz/dataset/refgta"
 
     random.seed(42)
 

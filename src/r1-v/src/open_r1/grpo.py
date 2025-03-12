@@ -92,22 +92,11 @@ def main(script_args, training_args, model_args):
     reward_funcs = [reward_funcs_registry[func] for func in script_args.reward_funcs]
 
     # Load the dataset
-    # Load the dataset
-    is_local = os.environ.get("IS_LOCAL", False)
-    if is_local:
-        data_path = f"./processed_data/r1_data/{script_args.dataset_name}"
-        dataset = load_from_disk(data_path)
-        # shuffle by seed
-        try:
-            random_number = random.randint(1, 100)
-            dataset = dataset.shuffle(seed=random_number)
-            print(f"Shuffle with seed: {random_number}")
-        except Exception as e:
-            print(e)
-        print(dataset)
-    else:
-        dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
-        dataset.save_to_disk(f"./processed_data/r1_data/{script_args.dataset_name}")
+    dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
+    # random_number = random.randint(1, 100)
+    # dataset = dataset.shuffle(seed=random_number)
+    # dataset.save_to_disk(f"./processed_data/r1_data/{script_args.dataset_name}")
+    print(dataset)
 
 
     # Format into conversation
@@ -121,6 +110,7 @@ def main(script_args, training_args, model_args):
 
     def make_conversation_image(example):
         if "has_image" in example:
+            ## visual data
             if example["has_image"]:
                 return {
                     "prompt": [
@@ -133,6 +123,7 @@ def main(script_args, training_args, model_args):
                         },
                     ]
                 }
+            ## text-only data
             else:
                 return {
                     "prompt": [
@@ -140,6 +131,7 @@ def main(script_args, training_args, model_args):
                         {"role": "user", "content": example["problem"]},
                     ],
             }
+        ## default
         else:
             return {
                     "prompt": [
@@ -160,11 +152,11 @@ def main(script_args, training_args, model_args):
         # dataset = dataset.remove_columns(["original_question", "original_answer"])
         except Exception as e:
             print(e)
-            print("Make Conversation Image Later")
+            print("Make Conversation with Image Later")
 
     else:
         print("no image in dataset")
-        dataset = dataset.map(make_conversation, num_proc=32)
+        dataset = dataset.map(make_conversation, num_proc=8)
         try:
             dataset = dataset.remove_columns("messages")
         except:
