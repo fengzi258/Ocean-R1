@@ -1,4 +1,4 @@
-# OpenV-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning
+# Ocean-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning
 
 ## 🎯Overview
 
@@ -6,8 +6,8 @@
 
 Since visual perception tasks involve many aspects, we mainly focus on visual recognition and positioning as well as reasoning tasks. The motivation behinds this is that visual perception is used to identify and extract visual information, and LLM's powerful reasoning ability is used to solve the problem. The combination of the two can solve complex multimodal reasoning tasks. To this end, we conducted the following explorations:
 
-- We train Qwen2.5-VL-3B-Instruct on text-only dataset [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function. 
-- We train Qwen2.5-VL-3B-Instruct on visual dataset [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using GRPO with a rule-based reward function.
+- We train Qwen2.5-VL-3B-Instruct on text-only dataset [Ocean-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_text_data) using GRPO with a rule-based reward function. 
+- We train Qwen2.5-VL-3B-Instruct on visual dataset [Ocean-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_text_data) using GRPO with a rule-based reward function.
 - We train Qwen2.5-VL-3B-Instruct on multimodel data combined with the above two. We will relase the results soon. -->
 
 
@@ -15,20 +15,20 @@ Inspired by the robust reasoning capabilities demonstrated by [DeepSeek R1](http
 
 Given the multifaceted nature of visual perception tasks, our focus centers on two critical components: visual recognition and positioning, as well as reasoning tasks. **This approach is motivated by the complementary strengths of visual perception—which identifies and extracts visual information—and the advanced reasoning capabilities of LLMs, which are adept at problem-solving. By integrating these two modalities, we aim to address complex multimodal reasoning challenges**. To achieve this, we conducted the following experiments:
 
-- **Text-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using Goal-Specific Reward Optimization (GRPO) with a rule-based reward function.
+- **Text-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [Ocean-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_text_data) using Goal-Specific Reward Optimization (GRPO) with a rule-based reward function.
 
-- **Visual-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_visual_data) using GRPO with a rule-based reward function.
+- **Visual-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [Ocean-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_visual_data) using GRPO with a rule-based reward function.
 
 - **Multimodal Training**: We are training Qwen2.5-VL-3B-Instruct on a combined dataset integrating both text and visual data. The results of these experiments will be released in the near future.
 
 This systematic exploration aims to evaluate the efficacy of GRPO in enhancing multimodal reasoning capabilities and to provide insights into the interplay between visual and textual modalities in complex reasoning tasks.
 
 🔥We open-source our complete pipeline to foster further research in this area. We release all our codes, model, data. 
-- [🤗 OpenV-R1-3B-Instruct](https://huggingface.co/minglingfeng/OpenV_R1_3B_Instruct)
+- [🤗 Ocean-R1-3B-Instruct](https://huggingface.co/minglingfeng/Ocean_R1_3B_Instruct)
 
-- [🤗 OpenV-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data)
+- [🤗 Ocean-R1 Training Visual Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_visual_data)
 
-- [🤗 OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data)
+- [🤗 Ocean-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_text_data)
 
 > [!NOTE] 
 > These data are from the open source community and are obtained through cleaning and filtering.
@@ -38,12 +38,12 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 ---
 
 ### 🚀 News
-- 2025-03-10: We release the OpenV-R1 repo, including codebase, model, and training datasets.
+- 2025-03-10: We release the Ocean-R1 repo, including codebase, model, and training datasets.
 
 ---
 
 ### 🗞️ Our Findings
-![Image](./assets/openv-r1.png)
+![Image](./assets/Ocean-R1.png)
 <img width="360" src=./assets/training_reward.png />
 <img width="360" src=./assets/training_length.png />
 
@@ -55,8 +55,8 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 ## 📦 Setup
 
 ```bash
-conda create -n openv_r1 python=3.11 
-conda activate openv_r1
+conda create -n Ocean_R1 python=3.11 
+conda activate Ocean_R1
 
 bash setup.sh
 ```
@@ -69,23 +69,23 @@ bash setup.sh
 ## 🔄 Training
 
 ### Data Preparation
-You can download our training data from [OpenV_R1_collected_visual_data](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_visual_data) and [OpenV_R1_collected_text_data](https://huggingface.co/datasets/minglingfeng/OpenV_R1_collected_text_data).
+You can download our training data from [Ocean_R1_collected_visual_data](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_visual_data) and [Ocean_R1_collected_text_data](https://huggingface.co/datasets/minglingfeng/Ocean_R1_collected_text_data).
 
 ### GRPO
 - ./src/scripts/run_grpo_qwen2d5vl.sh
-- ./src/scripts/run_grpo_vllm_qwen2d5vl_openv_r1_visual_data.sh
+- ./src/scripts/run_grpo_vllm_qwen2d5vl_Ocean_R1_visual_data.sh
 
 ```bash
 cd src/r1-v
 
-HF_DATASET="minglingfeng/OpenV_R1_collected_visual_data" 
+HF_DATASET="minglingfeng/Ocean_R1_collected_visual_data" 
 
 export FORMAT_REWARD_FACTOR=1.0
-export IS_LOCAL=False ## load_from_disk or load_dataset from huggingface: minglingfeng/OpenV_R1_collected_visual_data
+export IS_LOCAL=False ## load_from_disk or load_dataset from huggingface: minglingfeng/Ocean_R1_collected_visual_data
 export DEBUG_MODE="true"
 export LOG_PATH=./src/logs/debug_qwen2p5_vl_3b_${HF_DATASET}.log
 # export WANDB_API_KEY="xxxxx"
-export WANDB_PROJECT="OpenV-R1"
+export WANDB_PROJECT="Ocean-R1"
 
 QWEN_PATH=/global_data/mllm/minglingfeng/models/Qwen2.5-VL-3B-Instruct
 OUTPUT_DIR=./src/r1-v/src/outputs/exp-Qwen2.5-VL-3B/${HF_DATASET}
@@ -235,8 +235,8 @@ If you find this work useful, please cite it as follows:
 ```bib
 @misc{ming2025openvr1,
   author       = {Lingfeng Ming, Youwei Zhang, Yadong Li, Song Chen, Jianhua Xu, Zenan Zhou, Weipeng Chen},
-  title        = {OpenV-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning},
-  howpublished = {\url{https://github.com/fengzi258/OpenV-R1}},
+  title        = {Ocean-R1: An Open and Generalizable Large Vision-Language Model enhanced by Reinforcement Learning},
+  howpublished = {\url{https://github.com/fengzi258/Ocean-R1}},
   note         = {Accessed: 2025-03-10},
   year         = {2025}
 }
