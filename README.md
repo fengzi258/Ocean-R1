@@ -155,11 +155,88 @@ accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1
 > The models are evaluated in the `zero-shot` setting and with an `extracted matching` approach, which corresponds to the rule-based reward in training stage. We provide the following evaluation scripts for reproduction.
 
 
-| Model       | SuperCLEVR       |GEOQA       |RefCOCO/+/g AVG     |MathVision       |MathVerse       |OlympiadBench       |MMMU       |
+<!-- | Model       | SuperCLEVR       |GEOQA       |RefCOCO/+/g AVG     |MathVision       |MathVerse       |OlympiadBench       |MMMU       |
 |:-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | Qwen2.5-VL-3B-Instruct   |64.1    |37.0    |75.3    |14.4    |27.6    |14.6    |40.5    |
 | Qwen2.5-VL-3B-Instruct-GRPO-text   | 66.1   |38.7    |2.4    |17.4   |31.5    |14.8    |43.4    |
-| Qwen2.5-VL-3B-Instruct-GRPO-vis   | 93.4   | 54.2   |86.1    |19.1    |40.0    |15.5    |47.9    |
+| Qwen2.5-VL-3B-Instruct-GRPO-vis   | 93.4   | 54.2   |86.1    |19.1    |40.0    |15.5    |47.9    | -->
+<style>
+  table {
+    border-collapse: collapse; /* 合并边框 */
+    width: 100%; /* 可选：设置表格宽度 */
+    text-align: center;
+    font-size: 12px;
+  }
+  
+  /* 定义 .bold-row 类的样式 */
+  .bold-row {
+    font-weight: bold;
+  }
+    .bold-cell {
+    font-weight: bold;
+  }
+</style>
+
+
+<table>
+  <!-- 第一行 -->
+  <tr class="bold-row">
+    <td></td>
+    <td>Counting</td>
+    <td>Geometric Reasoning</td>
+    <td>Grounding</td>
+    <td colspan="3" style="text-align:center;">Math</td>
+    <td>General</td>
+  </tr>
+  
+  <!-- 第二行 -->
+  <tr>
+    <td class="bold-cell">Model</td>
+    <td>SuperCLEVR</td>
+    <td>GEOQA</td>
+    <td>RefCOCO/+/g AVG</td>
+    <td>MathVision</td>
+    <td>MathVerse</td>
+    <td>OlympiadBench</td>
+    <td>MMMU</td>
+  </tr>
+
+  <!-- 第三行 -->
+  <tr>
+    <td>Qwen2.5-VL-3B-Instruct</td>
+    <td>64.1</td>
+    <td>37.0</td>
+    <td>75.3</td>
+    <td>14.4</td>
+    <td>27.6</td>
+    <td>14.6</td>
+    <td>40.5</td>
+  </tr>
+
+  <!-- 第四行 -->
+  <tr>
+    <td>Qwen2.5-VL-3B-Instruct-GRPO-text</td>
+    <td>66.1</td>
+    <td>38.7</td>
+    <td>2.4</td>
+    <td>17.4</td>
+    <td>31.5</td>
+    <td>14.8</td>
+    <td>43.4</td>
+  </tr>
+
+  <!-- 第五行 -->
+  <tr>
+    <td>Qwen2.5-VL-3B-Instruct-GRPO-vis</td>
+    <td class="bold-cell">93.4</td>
+    <td class="bold-cell">54.2</td>
+    <td class="bold-cell">86.1</td>
+    <td class="bold-cell">19.1</td>
+    <td class="bold-cell">40.0</td>
+    <td class="bold-cell">15.5</td>
+    <td class="bold-cell">47.9</td>
+  </tr>
+</table>
 
 ### Counting: SuperCLEVR
 
