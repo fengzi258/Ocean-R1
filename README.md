@@ -160,25 +160,24 @@ accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1
 | Qwen2.5-VL-3B-Instruct   |64.1    |37.0    |75.3    |14.4    |27.6    |14.6    |40.5    |
 | Qwen2.5-VL-3B-Instruct-GRPO-text   | 66.1   |38.7    |2.4    |17.4   |31.5    |14.8    |43.4    |
 | Qwen2.5-VL-3B-Instruct-GRPO-vis   | 93.4   | 54.2   |86.1    |19.1    |40.0    |15.5    |47.9    | -->
-<style>
-  table {
-    border-collapse: collapse; /* 合并边框 */
-    width: 100%; /* 可选：设置表格宽度 */
-    text-align: center;
-    font-size: 12px;
-  }
-  
-  /* 定义 .bold-row 类的样式 */
-  .bold-row {
-    font-weight: bold;
-  }
-    .bold-cell {
-    font-weight: bold;
-  }
-</style>
+
 
 
 <table>
+  <style>
+      table {
+      border-collapse: collapse; /* 合并边框 */
+      width: 100%; /* 可选：设置表格宽度 */
+      text-align: center;
+      font-size: 12px;
+    }
+      .bold-row {
+      font-weight: bold;
+    }
+      .bold-cell {
+      font-weight: bold;
+    }
+  </style>
   <!-- 第一行 -->
   <tr class="bold-row">
     <td></td>
