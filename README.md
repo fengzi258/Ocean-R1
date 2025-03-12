@@ -35,9 +35,6 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 
 
 
-<img width="379" src=./assets/training_reward.png />
-<img width="379" src=./assets/training_length.png />
-
 ---
 
 ### 🚀 News
@@ -47,9 +44,10 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 
 ### 🗞️ Our Findings
 ![Image](./assets/openv-r1.png)
+<img width="360" src=./assets/training_reward.png />
+<img width="360" src=./assets/training_length.png />
 
 - **Excellent Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.
-However, the model's performance on strong visual perception tasks significantly decreased. For instance, in the Grounding task (refcoco/+/g), average performance dropped from 75.3 to 2.4. This indicates that enhancing specific capabilities through GRPO can impair other aspects of the model.
 - **Diverse Data Achieves Better Performances**: When trained with visual data, the model exhibited substantial performance gains across a wide range of tasks, including counting, geometric reasoning, grounding, mathematical problem-solving, and general-purpose tasks. This demonstrates the importance of multimodal training in achieving balanced and comprehensive improvements across diverse domains.
 
 
