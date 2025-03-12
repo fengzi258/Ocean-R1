@@ -151,6 +151,8 @@ accelerate launch --config_file src/r1-v/configs/zero2.yaml src/r1-v/src/open_r1
 ```
 
 ## 🧪 Evaluation
+> [!NOTE] 
+> The models are evaluated in the zero-shot setting and with an extracted matching approach, which corresponds to the rule-based reward in training stage. We provide the following evaluation scripts for reproduction.
 
 
 | Model       | SuperCLEVR       |GEOQA       |RefCOCO/+/g AVG     |MathVision       |MathVerse       |OlympiadBench       |MMMU       |
@@ -209,8 +211,6 @@ python ./src/eval/test_qwen2d5vl_mathvision_multigpu.py
 python ./src/eval/test_qwen2d5vl_mathverse_multigpu.py
 python ./src/eval/test_qwen2d5vl_olympiadbench_multigpu.py
 ```
-> [!NOTE] 
-> The models are evaluated in the zero-shot setting and with an extracted matching approach, which corresponds to the rule-based reward in training stage.
 
 ### General: MMMU
 ```bash
