@@ -48,7 +48,7 @@ This systematic exploration aims to evaluate the efficacy of GRPO in enhancing m
 ### 🗞️ Our Findings
 ![Image](./assets/openv-r1.png)
 
-- **Super Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.
+- **Excellent Cross-Modal Reasoning Ability**: In our experiments, training exclusively with text-only data led to varying degrees of performance improvement on reasoning-related tasks, such as geometric reasoning and mathematical problem-solving. This highlights the potential of incorporating textual inference data to enhance the VLM model's reasoning capabilities. Furthermore, improvements were also observed in counting tasks and general-purpose tasks, suggesting that the enhanced reasoning abilities can generalize to broader applications. However, this approach came at a cost: the model's performance on tasks requiring strong visual perception significantly declined. For example, in the Grounding task (refcoco/+/g), the average performance plummeted from 75.3 to 2.4. This underscores a trade-off, indicating that while GRPO can strengthen specific capabilities, it may inadvertently impair other critical aspects of the model.
 However, the model's performance on strong visual perception tasks significantly decreased. For instance, in the Grounding task (refcoco/+/g), average performance dropped from 75.3 to 2.4. This indicates that enhancing specific capabilities through GRPO can impair other aspects of the model.
 - **Diverse Data Achieves Better Performances**: When trained with visual data, the model exhibited substantial performance gains across a wide range of tasks, including counting, geometric reasoning, grounding, mathematical problem-solving, and general-purpose tasks. This demonstrates the importance of multimodal training in achieving balanced and comprehensive improvements across diverse domains.
 
@@ -170,7 +170,6 @@ unzip images.zip
 
 # change image dir and the model path in the scripts
 python ./src/eval/test_qwen2d5vl_counting_superclevr_5k.py
-python ./src/eval/test_qwen2d5vl_counting_superclevr.py
 
 ```
 
@@ -212,6 +211,8 @@ python ./src/eval/test_qwen2d5vl_mathvision_multigpu.py
 python ./src/eval/test_qwen2d5vl_mathverse_multigpu.py
 python ./src/eval/test_qwen2d5vl_olympiadbench_multigpu.py
 ```
+> [!NOTE] 
+> The models are evaluated in the zero-shot setting and with an extracted matching approach, which corresponds to the rule-based reward in training stage.
 
 ### General: MMMU
 ```bash
@@ -230,7 +231,7 @@ We sincerely thank [DeepSeek](https://github.com/deepseek-ai/DeepSeek-R1), [Open
 
 ## 📚 Contributors and Citation
 
-Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN), Youwei Zhang, [Yadong Li](https://scholar.google.com/citations?user=VLfXcYIAAAAJ&hl=en), Song Chen, Jianhua Xu, [Zenan Zhou](https://scholar.google.com/citations?user=tZa2hzAAAAAJ&hl=en), [Weipeng Chen](https://scholar.google.com.hk/citations?user=tKPgUmMAAAAJ&hl=zh-CN). 
+Contributors: [Lingfeng Ming](https://scholar.google.com/citations?user=QOMvlswAAAAJ&hl=zh-CN), Youwei Zhang, [Yadong Li](https://scholar.google.com/citations?user=VLfXcYIAAAAJ&hl=en), Song Chen, Jianhua Xu. 
 
 If you find this work useful, please cite it as follows:
 ```bib
