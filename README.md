@@ -13,7 +13,7 @@ Since visual perception tasks involve many aspects, we mainly focus on visual re
 
 Inspired by the robust reasoning capabilities demonstrated by [DeepSeek R1](https://arxiv.org/abs/2501.12948)  in the text domain, we seek to extend the large-scale reinforcement learning (RL) techniques that have proven effective for large language models (LLMs) to multimodal scenarios.
 
-Given the multifaceted nature of visual perception tasks, our focus centers on two critical components: visual recognition and positioning, as well as reasoning tasks. This approach is motivated by the complementary strengths of visual perception—which identifies and extracts visual information—and the advanced reasoning capabilities of LLMs, which are adept at problem-solving. By integrating these two modalities, we aim to address complex multimodal reasoning challenges. To achieve this, we conducted the following experiments:
+Given the multifaceted nature of visual perception tasks, our focus centers on two critical components: visual recognition and positioning, as well as reasoning tasks. **This approach is motivated by the complementary strengths of visual perception—which identifies and extracts visual information—and the advanced reasoning capabilities of LLMs, which are adept at problem-solving. By integrating these two modalities, we aim to address complex multimodal reasoning challenges**. To achieve this, we conducted the following experiments:
 
 - **Text-Only Training**: We trained Qwen2.5-VL-3B-Instruct on the [OpenV-R1 Training Text Dataset](https://huggingface.co/datasets/minglingfeng/Openv_R1_collected_text_data) using Goal-Specific Reward Optimization (GRPO) with a rule-based reward function.
 
